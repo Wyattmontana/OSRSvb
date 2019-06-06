@@ -8,6 +8,8 @@ Imports Newtonsoft.Json.Linq
 Public Class Form1
     Public goUrl = ""
     Public geUrl = ""
+    Public picUrl = ""
+    Public Data = ""
     Public itemName As String = ""
     Public itemDescr As String = ""
     Public itemPrice As Integer = 0
@@ -33,26 +35,30 @@ Public Class Form1
 
             'Create a new Stream Reader
             Dim StreamReader As New System.IO.StreamReader(ResponseStream)
-            Dim Data As String = StreamReader.ReadToEnd
-
-            'StreamReader.Close()
+            Data = StreamReader.ReadToEnd
 
             'display the data on the screen
             urlResponseText.Text = Data
 
-            Dim picUrl As String = ("http://services.runescape.com/m=itemdb_oldschool/obj_big.gif?id=" + ItemNum.Text)
+            picUrl = ("http://services.runescape.com/m=itemdb_oldschool/obj_big.gif?id=" + ItemNum.Text)
             picBox1.Show()
             picBox1.Load(picUrl)
 
         Catch ex As Exception
             MsgBox("Inproper Input!")
             picBox1.Hide()
-            'Dim itmNum As String = goUrl.Text.Substring(62, 5)
+            urlResponseText.Text = ""
         End Try
+
+
 
     End Sub
 
     Private Sub geLink_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles geLink.LinkClicked
         Process.Start(geUrl)
+    End Sub
+
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs)
+
     End Sub
 End Class
